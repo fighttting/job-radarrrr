@@ -1,4 +1,7 @@
-﻿const ApplicationCard = (props) => {
+﻿import React from "react";
+import { createRoot } from "react-dom/client";
+
+const ApplicationCard = (props) => {
   return React.createElement(
     "div",
     {},
@@ -12,14 +15,25 @@ const App = () => {
   return React.createElement(
     "div",
     {},
-    React.createElement("h1", {}, "applied"),
+    React.createElement("h1", {}, "Job Radar"),
     React.createElement(ApplicationCard, {
       company: "Zalando",
       role: "Frontend Intern",
       status: "applied",
     }),
+    React.createElement(ApplicationCard, {
+      company: "Google",
+      role: "Software Engineer",
+      status: "interviewing",
+    }),
+    React.createElement(ApplicationCard, {
+      company: "Facebook",
+      role: "Backend Developer",
+      status: "offer received",
+    }),
   );
 };
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const container = document.getElementById("root");
+const root = createRoot(container);
 root.render(React.createElement(App));

@@ -1,4 +1,4 @@
-# job-raderrrr
+# job-radarrrr
 
 A job application tracker I built because my spreadsheet stopped working.
 
@@ -23,8 +23,11 @@ deployment is half the point.
 ## Status
 
 **v0.1** — renders a list of applications. Not deployed yet.
+**v0.2** — Vite build, ESLint + Prettier, application list rendering from a static dataset.
+Not deployed yet.
 
-Working on: replacing the CDN setup with a proper build.
+Working on: add, edit, delete.
+
 
 ---
 
@@ -57,12 +60,13 @@ Working on: replacing the CDN setup with a proper build.
 
 ## Stack
 
-| Layer | Choice | Reasoning |
-|---|---|---|
-| UI | React 18 | Component model fits a list/detail app; large ecosystem for routing and server state |
-| Build | — | See below |
+| Layer  | Tool                                | What it does                                           |
+| ------ | ----------------------------------- | ------------------------------------------------------ |
+| UI     | React 18                            | Builds the interface from reusable components          |
+| Build  | Vite                                | Runs the dev server and handles ES modules and builds  |
+| Lint   | ESLint (flat config)                | Checks code for errors and problematic patterns        |
+| Format | Prettier + `eslint-config-prettier` | Formats code consistently and avoids conflicting rules |
 
-Extended as each layer gets built.
 
 ---
 
@@ -77,23 +81,36 @@ components need to be split across files, Vite goes in.
 ## Running locally
 
 ```bash
-git clone git@github.com:fighttting/job-raderrrr.git
-cd job-raderrrr
-npx serve .
+git clone https://github.com/fighttting/job-radarrrr.git
+cd job-radarrrr
+npm install
+npm run dev
 ```
 
-Open http://localhost:3000. No install step — React is loaded from a CDN.
+Open http://localhost:5173
+
+
+| Script | Does |
+|---|---|
+| `npm run dev` | Vite dev server with HMR |
+| `npm run build` | Production build to `dist/` |
+| `npm run preview` | Serve the production build locally |
+| `npm run lint` | ESLint |
+| `npm run format` | Prettier, writes in place |
 
 ---
 
 ## Structure
 
 ```
-job-raderrrr/
-├── index.html      # entry point
+job-Radarrrr/
+├── index.html          # Vite entry
+├── vite.config.js
+├── eslint.config.mjs
+├── package.json
 ├── src/
-│   └── App.js      # components
-└── README.md
+│   └── App.js          # components
+└── Readme.md
 ```
 
 ---
@@ -101,6 +118,7 @@ job-raderrrr/
 ## Changelog
 
 **v0.1** — Application list rendering from a static dataset.
+**v0.2** — Migrated from CDN scripts to a Vite build. Added ESLint and Prettier.
 
 ---
 

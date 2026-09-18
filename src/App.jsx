@@ -1,5 +1,6 @@
 ﻿import { createRoot } from "react-dom/client";
 import ApplicationCard from "./ApplicationCard";
+import { applications } from "./data";
 
 // const ApplicationCard = (props) => {
 //   return React.createElement(
@@ -33,9 +34,9 @@ const App = () => {
     // }),
     <div>
       <h1>Job Radar - Let's Get Started^^</h1>
-      <ApplicationCard company="Zalando" role="Frontend Intern" status="applied" />
-      <ApplicationCard company="Google" role="Software Engineer" status="interviewing" />
-      <ApplicationCard company="Facebook" role="Backend Developer" status="offer received" />
+     {applications.map((app) => (
+     <ApplicationCard key={app.id} {...app} />
+     ))}
     </div>
   );
 };

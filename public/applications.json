@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "company": "Zalando",
+    "role": "Frontend Intern",
+    "status": "applied"
+  },
+  {
+    "id": 2,
+    "company": "Google",
+    "role": "Software Engineer",
+    "status": "interviewing"
+  },
+  {
+    "id": 3,
+    "company": "Facebook",
+    "role": "Backend Developer",
+    "status": "offer"
+  },
+  {
+    "id": 4,
+    "company": "Amazon",
+    "role": "Frontend Engineer",
+    "status": "applied"
+  },
+  {
+    "id": 5,
+    "company": "Apple",
+    "role": "iOS Developer",
+    "status": "interviewing"
+  },
+  {
+    "id": 6,
+    "company": "Netflix",
+    "role": "Full Stack Engineer",
+    "status": "rejected"
+  }
+]

@@ -1,9 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ApplicationCard from "./ApplicationCard";
-import { applications } from "./data";
 
 export default function ApplicationList() {
   const [filter, setFilter] = useState("all");
+  const [applications, setApplications] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchApplications();
+  }, []);
+
+  async function fetchApplications() {
+    const res = await fetch("/applications.json");
+    const json = await res.json();
+    setApplications(json);
+    setLoading(false);
+  }
 
   const visible =
     filter === "all"
@@ -26,13 +38,18 @@ export default function ApplicationList() {
         <option value="rejected">Rejected</option>
       </select>
 
-      <p>
-        Showing {visible.length} of {applications.length}
-      </p>
-
-      {visible.map((app) => (
-        <ApplicationCard key={app.id} {...app} />
-      ))}
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <p>
+            Showing {visible.length} of {applications.length}
+          </p>
+          {visible.map((app) => (
+            <ApplicationCard key={app.id} {...app} />
+          ))}
+        </>
+      )}
     </div>
   );
 }

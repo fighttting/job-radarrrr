@@ -1,14 +1,19 @@
-﻿import { createRoot } from "react-dom/client";
+﻿import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import Stats from "./Stats";
 import NewApplication from "./NewApplication";
 import ApplicationList from "./ApplicationList";
 
 const App = () => {
   return (
+    <StrictMode>
     <div>
-      <h1 className="logo">Job Radar</h1>
+      <h1 className="logo">Job Radar --lets goooo^^</h1>
       <NewApplication />
       <ApplicationList />
+      <Stats />
     </div>
+    </StrictMode>
   );
 };
 

@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { ApplicationsContext } from "./contexts";
 import ApplicationCard from "./ApplicationCard";
 
-export default function ApplicationList({ applications, loading }) {
+export default function ApplicationList({ loading }) {
+  const [applications] = useContext(ApplicationsContext);
   const [filter, setFilter] = useState("all");
   const visible =
     filter === "all"

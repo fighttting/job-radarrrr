@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { ApplicationsContext } from "./contexts";
 import ApplicationCard from "./ApplicationCard";
 
-export default function NewApplication({ onAdd }) {
+export default function NewApplication() {
+  const [, setApplications] = useContext(ApplicationsContext);
   const [company, setCompany] = useState("");
   const [role, setRole] = useState("");
   const [status, setStatus] = useState("applied");
@@ -13,14 +15,15 @@ export default function NewApplication({ onAdd }) {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          onAdd({
+          const application = {
             id: Date.now(),
             company,
             role,
             status,
             workMode,
             appliedDate: new Date().toISOString().slice(0, 10),
-          });
+          };
+          setApplications((previous) => [...previous, application]);
           setCompany("");
           setRole("");
           setStatus("applied");

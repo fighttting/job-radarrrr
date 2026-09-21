@@ -1,22 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ApplicationCard from "./ApplicationCard";
 
-export default function ApplicationList() {
+export default function ApplicationList({ applications, loading }) {
   const [filter, setFilter] = useState("all");
-  const [applications, setApplications] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchApplications();
-  }, []);
-
-  async function fetchApplications() {
-    const res = await fetch("/applications.json");
-    const json = await res.json();
-    setApplications(json);
-    setLoading(false);
-  }
-
   const visible =
     filter === "all"
       ? applications

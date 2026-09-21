@@ -1,4 +1,4 @@
-import { useState, useEffect, useDebugValue } from "react";
+import { useMemo, useDebugValue } from "react";
 
 const DAY = 24 * 60 * 60 * 1000;
 
@@ -31,20 +31,8 @@ function computeStats(applications) {
   return { total, thisWeek, responseRate, avgWaitDays };
 }
 
-export const useStats = () => {
-  const [stats, setStats] = useState(null);
-
-  useDebugValue(stats ? `${stats.total} applications` : "Loading...");
-
-  useEffect(() => {
-    async function fetchStats() {
-      const response = await fetch("/applications.json");
-      const applications = await response.json();
-      setStats(computeStats(applications));
-    }
-
-    fetchStats();
-  }, []);
-
+export const useStats = (applications) => {
+  const stats = useMemo(() => computeStats(applications), [applications]);
+  useDebugValue(`${stats.total} applications`);
   return stats;
 };

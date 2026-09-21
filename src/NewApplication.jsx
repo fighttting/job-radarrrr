@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ApplicationCard from "./ApplicationCard";
 
-export default function NewApplication() {
+export default function NewApplication({ onAdd }) {
   const [company, setCompany] = useState("");
   const [role, setRole] = useState("");
   const [status, setStatus] = useState("applied");
@@ -10,7 +10,23 @@ export default function NewApplication() {
   return (
     <div className="new-application-form">
       <h2>New Application</h2>
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          onAdd({
+            id: Date.now(),
+            company,
+            role,
+            status,
+            workMode,
+            appliedDate: new Date().toISOString().slice(0, 10),
+          });
+          setCompany("");
+          setRole("");
+          setStatus("applied");
+          setWorkMode("onsite");
+        }}
+      >
         <div>
           <label htmlFor="company">Company:</label>
           <input

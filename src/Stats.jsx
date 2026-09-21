@@ -1,9 +1,9 @@
 import { useStats } from "./useStats";
 
-export default function Stats() {
-  const stats = useStats();
+export default function Stats({ applications, loading }) {
+  const stats = useStats(applications);
 
-  if (!stats) {
+  if (loading) {
     return <p>Loading stats…</p>;
   }
 

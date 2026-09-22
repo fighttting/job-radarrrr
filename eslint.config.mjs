@@ -5,7 +5,7 @@ import prettier from "eslint-config-prettier";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-  { ignores: ["dist/**"] },
+  { ignores: ["dist/**", "src/routeTree.gen.ts"] },
   js.configs.recommended,
 
   {

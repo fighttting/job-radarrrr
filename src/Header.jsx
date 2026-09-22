@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "@tanstack/react-router";
 import { ApplicationsContext } from "./contexts";
 
 export default function Header() {
@@ -6,8 +7,13 @@ export default function Header() {
 
   return (
     <nav>
-      <h1 className="logo">Job Radar --lets goooo^^</h1>
-      <div className="nav-count">{applications.length} applications</div>
+      <Link to="/">
+        <h1 className="logo">Job Radar</h1>
+      </Link>
+      <div className="nav-links">
+        <Link to="/">Board</Link> <Link to="/stats">Stats</Link>
+      </div>
+      <div className="nav-count">{applications?.length ?? 0} applications</div>
     </nav>
   );
 }

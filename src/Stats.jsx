@@ -2,12 +2,12 @@ import { useContext } from "react";
 import { ApplicationsContext } from "./contexts";
 import { useStats } from "./useStats";
 
-export default function Stats({ loading }) {
+export default function Stats() {
   const [applications] = useContext(ApplicationsContext);
-  const stats = useStats(applications);
+  const stats = useStats(applications ?? []);
 
-  if (loading) {
-    return <p>Loading stats…</p>;
+  if (!applications) {
+    return <p>Loading stats...</p>;
   }
 
   return (

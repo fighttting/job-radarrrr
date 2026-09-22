@@ -23,7 +23,7 @@ export default function NewApplication() {
             workMode,
             appliedDate: new Date().toISOString().slice(0, 10),
           };
-          setApplications((previous) => [...previous, application]);
+          setApplications((previous) => [...(previous ?? []), application]);
           setCompany("");
           setRole("");
           setStatus("applied");

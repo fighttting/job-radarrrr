@@ -2,9 +2,14 @@ import { useState, useContext } from "react";
 import { ApplicationsContext } from "./contexts";
 import ApplicationCard from "./ApplicationCard";
 
-export default function ApplicationList({ loading }) {
+export default function ApplicationList() {
   const [applications] = useContext(ApplicationsContext);
   const [filter, setFilter] = useState("all");
+
+  if (!applications) {
+    return <p>Loading...</p>;
+  }
+
   const visible =
     filter === "all"
       ? applications
@@ -26,18 +31,12 @@ export default function ApplicationList({ loading }) {
         <option value="rejected">Rejected</option>
       </select>
 
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          <p>
-            Showing {visible.length} of {applications.length}
-          </p>
-          {visible.map((app) => (
-            <ApplicationCard key={app.id} {...app} />
-          ))}
-        </>
-      )}
+      <p>
+        Showing {visible.length} of {applications.length}
+      </p>
+      {visible.map((app) => (
+        <ApplicationCard key={app.id} {...app} />
+      ))}
     </div>
   );
 }

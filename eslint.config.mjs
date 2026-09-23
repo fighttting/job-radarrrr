@@ -2,6 +2,7 @@ import reactPlugin from "eslint-plugin-react";
 import js from "@eslint/js";
 import globals from "globals";
 import prettier from "eslint-config-prettier";
+import pluginQuery from "@tanstack/eslint-plugin-query";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -16,7 +17,7 @@ export default [
       globals: { ...globals.browser, ...globals.node },
       parserOptions: {
         ecmaFeatures: {
-          jsx: true
+          jsx: true,
         },
       },
     },
@@ -33,6 +34,6 @@ export default [
   },
 
   reactPlugin.configs.flat["jsx-runtime"],
+  ...pluginQuery.configs["flat/recommended"],
   prettier,
-
 ];

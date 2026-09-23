@@ -1,13 +1,16 @@
-import { useContext } from "react";
-import { ApplicationsContext } from "./contexts";
+import { useApplications } from "./useApplications";
 import { useStats } from "./useStats";
 
 export default function Stats() {
-  const [applications] = useContext(ApplicationsContext);
+  const { isLoading, error, data: applications } = useApplications();
   const stats = useStats(applications ?? []);
 
-  if (!applications) {
+  if (isLoading) {
     return <p>Loading stats...</p>;
+  }
+
+  if (error) {
+    return <p>Could not load stats: {error.message}</p>;
   }
 
   return (

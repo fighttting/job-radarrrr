@@ -1,9 +1,8 @@
-import { useContext } from "react";
 import { Link } from "@tanstack/react-router";
-import { ApplicationsContext } from "./contexts";
+import { useApplications } from "./useApplications";
 
 export default function Header() {
-  const [applications] = useContext(ApplicationsContext);
+  const { data: applications } = useApplications();
 
   return (
     <nav>

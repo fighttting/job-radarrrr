@@ -1,13 +1,17 @@
-import { useState, useContext } from "react";
-import { ApplicationsContext } from "./contexts";
+import { useState } from "react";
+import { useApplications } from "./useApplications";
 import ApplicationCard from "./ApplicationCard";
 
 export default function ApplicationList() {
-  const [applications] = useContext(ApplicationsContext);
+  const { isLoading, error, data: applications } = useApplications();
   const [filter, setFilter] = useState("all");
 
-  if (!applications) {
+  if (isLoading) {
     return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Could not load applications: {error.message}</p>;
   }
 
   const visible =

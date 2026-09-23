@@ -1,9 +1,9 @@
-import { useState, useContext } from "react";
-import { ApplicationsContext } from "./contexts";
+import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import ApplicationCard from "./ApplicationCard";
 
 export default function NewApplication() {
-  const [, setApplications] = useContext(ApplicationsContext);
+  const queryClient = useQueryClient();
   const [company, setCompany] = useState("");
   const [role, setRole] = useState("");
   const [status, setStatus] = useState("applied");
@@ -23,7 +23,10 @@ export default function NewApplication() {
             workMode,
             appliedDate: new Date().toISOString().slice(0, 10),
           };
-          setApplications((previous) => [...(previous ?? []), application]);
+          queryClient.setQueryData(["applications"], (previous) => [
+            ...(previous ?? []),
+            application,
+          ]);
           setCompany("");
           setRole("");
           setStatus("applied");

@@ -5,6 +5,6 @@ export function useApplications() {
   return useQuery({
     queryKey: ["applications"],
     queryFn: getApplications,
-    staleTime: 30000,
+    staleTime: Infinity,
   });
 }

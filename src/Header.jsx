@@ -5,13 +5,13 @@ export default function Header() {
   const { isLoading, error, data: applications } = useApplications();
 
   let count;
-if (isLoading) {
-  count = "…";
-} else if (error) {
-  count = "Error";
-} else {
-  count = applications.length;
-}
+  if (isLoading) {
+    count = "…";
+  } else if (error) {
+    count = "Error";
+  } else {
+    count = applications.length;
+  }
 
   return (
     <nav>

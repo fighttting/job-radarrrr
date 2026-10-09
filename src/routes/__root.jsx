@@ -1,5 +1,5 @@
 import { createRootRoute, Outlet, useLocation } from "@tanstack/react-router";
-{import.meta.env.DEV && <TanStackRouterDevtools />}
+import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Header from "../Header";
 import ErrorBoundary from "../ErrorBoundary";
@@ -15,7 +15,7 @@ export const Route = createRootRoute({
             <Outlet />
           </ErrorBoundary>
         </div>
-        <TanStackRouterDevtools />
+        {import.meta.env.DEV && <TanStackRouterDevtools />}
         <ReactQueryDevtools />
       </>
     );

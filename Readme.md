@@ -28,12 +28,12 @@ Not deployed yet.
 
 Working on: add, edit, delete.
 
-
 ---
 
 ## Roadmap
 
 **Core app**
+
 - [x] Application list
 - [ ] Add, edit, delete
 - [ ] Filter by status — applied · interviewing · rejected · offer
@@ -41,17 +41,20 @@ Working on: add, edit, delete.
 - [ ] Detail view with interview notes
 
 **Data**
+
 - [ ] Replace mock data with a real API
 - [ ] Persist to a database
 - [ ] Authentication
 
 **Deployment**
+
 - [ ] Custom domain and DNS
 - [ ] nginx reverse proxy
 - [ ] HTTPS via Let's Encrypt, auto-renewing
 - [ ] Process supervision, firewall locked down to what's needed
 
 **Operations**
+
 - [ ] Containerised
 - [ ] Tests and deploys on push
 - [ ] Managed database and object storage
@@ -66,7 +69,6 @@ Working on: add, edit, delete.
 | Build  | Vite                                | Runs the dev server and handles ES modules and builds  |
 | Lint   | ESLint (flat config)                | Checks code for errors and problematic patterns        |
 | Format | Prettier + `eslint-config-prettier` | Formats code consistently and avoids conflicting rules |
-
 
 ---
 
@@ -89,14 +91,13 @@ npm run dev
 
 Open http://localhost:5173
 
-
-| Script | Does |
-|---|---|
-| `npm run dev` | Vite dev server with HMR |
-| `npm run build` | Production build to `dist/` |
+| Script            | Does                               |
+| ----------------- | ---------------------------------- |
+| `npm run dev`     | Vite dev server with HMR           |
+| `npm run build`   | Production build to `dist/`        |
 | `npm run preview` | Serve the production build locally |
-| `npm run lint` | ESLint |
-| `npm run format` | Prettier, writes in place |
+| `npm run lint`    | ESLint                             |
+| `npm run format`  | Prettier, writes in place          |
 
 ---
 

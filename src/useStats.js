@@ -1,31 +1,37 @@
 import { useMemo, useDebugValue } from "react";
-
-const DAY = 24 * 60 * 60 * 1000;
+import {
+  CLOSED_STATUSES,
+  appliedDate,
+  currentStatus,
+  lastUpdate,
+} from "./application";
+import { daysBetween, today } from "./dates";
 
 function computeStats(applications) {
-  const now = Date.now();
+  const now = today();
   const total = applications.length;
 
   const thisWeek = applications.filter(
-    (app) => now - new Date(app.appliedDate).getTime() < 7 * DAY,
+    (app) => daysBetween(appliedDate(app), now) < 7,
   ).length;
 
   // "applied" means still waiting; anything else means they got back to you
   const answered = applications.filter(
-    (app) => app.status !== "applied",
+    (app) => currentStatus(app) !== "applied",
   ).length;
   const responseRate = total === 0 ? 0 : Math.round((answered / total) * 100);
 
-  const waiting = applications.filter((app) => app.status === "applied");
+  const open = applications.filter(
+    (app) => !CLOSED_STATUSES.includes(currentStatus(app)),
+  );
   const avgWaitDays =
-    waiting.length === 0
+    open.length === 0
       ? 0
       : Math.round(
-          waiting.reduce(
-            (sum, app) =>
-              sum + (now - new Date(app.appliedDate).getTime()) / DAY,
+          open.reduce(
+            (sum, app) => sum + daysBetween(lastUpdate(app), now),
             0,
-          ) / waiting.length,
+          ) / open.length,
         );
 
   return { total, thisWeek, responseRate, avgWaitDays };

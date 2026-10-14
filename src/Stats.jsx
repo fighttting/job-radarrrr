@@ -21,7 +21,7 @@ export default function Stats() {
       {" · "}
       <span>Response rate: {stats.responseRate}%</span>
       {" · "}
-      <span>Avg wait: {stats.avgWaitDays} days</span>
+      <span>Avg days since last update: {stats.avgWaitDays}</span>
     </div>
   );
 }

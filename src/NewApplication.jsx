@@ -1,13 +1,52 @@
 import { useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
 import ApplicationCard from "./ApplicationCard";
+import { STATUSES } from "./application";
+import { today } from "./dates";
+import { useAddApplication } from "./useApplicationMutations";
+
+const WORK_MODES = { onsite: "On-site", hybrid: "Hybrid", remote: "Remote" };
+
+// Backfilling a later status records "applied" first, then that status
+function buildEvents(status, appliedOn, statusOn) {
+  const events = [{ status: "applied", date: appliedOn }];
+  if (status !== "applied") {
+    events.push({ status, date: statusOn });
+  }
+  return events;
+}
+
+function validate({ company, role, status, appliedOn, statusOn }) {
+  const errors = [];
+  const now = today();
+  if (!company.trim()) errors.push("Company is required.");
+  if (!role.trim()) errors.push("Role is required.");
+  if (!appliedOn) errors.push("Applied date is required.");
+  else if (appliedOn > now) errors.push("Applied date can't be in the future.");
+  if (status !== "applied") {
+    if (!statusOn) errors.push("Status date is required.");
+    else if (statusOn > now) errors.push("Status date can't be in the future.");
+    else if (appliedOn && statusOn < appliedOn)
+      errors.push("Status date can't be before the applied date.");
+  }
+  return errors;
+}
 
 export default function NewApplication() {
-  const queryClient = useQueryClient();
+  const addApplication = useAddApplication();
   const [company, setCompany] = useState("");
   const [role, setRole] = useState("");
   const [status, setStatus] = useState("applied");
   const [workMode, setWorkMode] = useState("onsite");
+  const [appliedOn, setAppliedOn] = useState(today);
+  const [statusOn, setStatusOn] = useState(today);
+
+  const errors = validate({ company, role, status, appliedOn, statusOn });
+  const draft = {
+    company: company || "Company name",
+    role: role || "Role",
+    workMode,
+    events: buildEvents(status, appliedOn || today(), statusOn || today()),
+  };
 
   return (
     <div className="new-application-form">
@@ -15,22 +54,20 @@ export default function NewApplication() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          const application = {
-            id: Date.now(),
-            company,
-            role,
-            status,
+          if (errors.length > 0) return;
+          addApplication.mutate({
+            id: crypto.randomUUID(),
+            company: company.trim(),
+            role: role.trim(),
             workMode,
-            appliedDate: new Date().toISOString().slice(0, 10),
-          };
-          queryClient.setQueryData(["applications"], (previous) => [
-            ...(previous ?? []),
-            application,
-          ]);
+            events: buildEvents(status, appliedOn, statusOn),
+          });
           setCompany("");
           setRole("");
           setStatus("applied");
           setWorkMode("onsite");
+          setAppliedOn(today());
+          setStatusOn(today());
         }}
       >
         <div>
@@ -52,6 +89,17 @@ export default function NewApplication() {
           />
         </div>
         <div>
+          <label htmlFor="applied-on">Applied on:</label>
+          <input
+            type="date"
+            name="applied-on"
+            id="applied-on"
+            max={today()}
+            value={appliedOn}
+            onChange={(e) => setAppliedOn(e.target.value)}
+          />
+        </div>
+        <div>
           <div>
             <label htmlFor="status">Status:</label>
             <select
@@ -60,60 +108,62 @@ export default function NewApplication() {
               value={status}
               onChange={(e) => setStatus(e.target.value)}
             >
-              <option value="applied">Applied</option>
-              <option value="interviewing">Interviewing</option>
-              <option value="offer">Offer</option>
-              <option value="rejected">Rejected</option>
+              {STATUSES.map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
+              ))}
             </select>
           </div>
 
+          {status !== "applied" && (
+            <div>
+              <label htmlFor="status-on">Status since:</label>
+              <input
+                type="date"
+                name="status-on"
+                id="status-on"
+                min={appliedOn}
+                max={today()}
+                value={statusOn}
+                onChange={(e) => setStatusOn(e.target.value)}
+              />
+            </div>
+          )}
+
           <label>Work Mode</label>
           <div>
-            <span>
-              <input
-                checked={workMode === "onsite"}
-                onChange={(e) => setWorkMode(e.target.value)}
-                type="radio"
-                name="work-mode"
-                value="onsite"
-                id="mode-onsite"
-              />
-              <label htmlFor="mode-onsite">On-site</label>
-            </span>
-            <span>
-              <input
-                checked={workMode === "hybrid"}
-                onChange={(e) => setWorkMode(e.target.value)}
-                type="radio"
-                name="work-mode"
-                value="hybrid"
-                id="mode-hybrid"
-              />
-              <label htmlFor="mode-hybrid">Hybrid</label>
-            </span>
-            <span>
-              <input
-                checked={workMode === "remote"}
-                onChange={(e) => setWorkMode(e.target.value)}
-                type="radio"
-                name="work-mode"
-                value="remote"
-                id="mode-remote"
-              />
-              <label htmlFor="mode-remote">Remote</label>
-            </span>
+            {Object.entries(WORK_MODES).map(([mode, label]) => (
+              <span key={mode}>
+                <input
+                  checked={workMode === mode}
+                  onChange={(e) => setWorkMode(e.target.value)}
+                  type="radio"
+                  name="work-mode"
+                  value={mode}
+                  id={`mode-${mode}`}
+                />
+                <label htmlFor={`mode-${mode}`}>{label}</label>
+              </span>
+            ))}
           </div>
         </div>
 
         <div className="new-application-preview">
-          <ApplicationCard
-            company={company || "Company name"}
-            role={role || "Role"}
-            status={`${status} · ${workMode}`}
-          />
+          <ApplicationCard application={draft} preview />
         </div>
 
-        <button type="submit">Add Application</button>
+        {(company || role) && errors.length > 0 && (
+          <ul className="form-errors">
+            {errors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        )}
+
+        <button type="submit" disabled={errors.length > 0}>
+          Add Application
+        </button>
       </form>
     </div>
   );

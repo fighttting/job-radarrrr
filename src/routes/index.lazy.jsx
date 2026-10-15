@@ -1,6 +1,7 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import NewApplication from "../NewApplication";
 import ApplicationList from "../ApplicationList";
+import DataControls from "../DataControls";
 
 export const Route = createLazyFileRoute("/")({
   component: Board,
@@ -11,6 +12,7 @@ function Board() {
     <div className="board">
       <NewApplication />
       <ApplicationList />
+      <DataControls />
     </div>
   );
 }

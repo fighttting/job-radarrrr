@@ -1,44 +1,60 @@
-[
-  {
-    "id": 1,
-    "company": "Zalando",
-    "role": "Frontend Intern",
-    "status": "applied",
-    "appliedDate": "2026-09-18"
-  },
-  {
-    "id": 2,
-    "company": "Google",
-    "role": "Software Engineer",
-    "status": "interviewing",
-    "appliedDate": "2026-09-08"
-  },
-  {
-    "id": 3,
-    "company": "Facebook",
-    "role": "Backend Developer",
-    "status": "offer",
-    "appliedDate": "2026-08-28"
-  },
-  {
-    "id": 4,
-    "company": "Amazon",
-    "role": "Frontend Engineer",
-    "status": "applied",
-    "appliedDate": "2026-09-19"
-  },
-  {
-    "id": 5,
-    "company": "Apple",
-    "role": "iOS Developer",
-    "status": "interviewing",
-    "appliedDate": "2026-09-15"
-  },
-  {
-    "id": 6,
-    "company": "Netflix",
-    "role": "Full Stack Engineer",
-    "status": "rejected",
-    "appliedDate": "2026-09-01"
-  }
-]
+{
+  "version": 1,
+  "applications": [
+    {
+      "id": "sample-1",
+      "company": "Zalando",
+      "role": "Frontend Intern",
+      "workMode": "hybrid",
+      "events": [{ "status": "applied", "date": "2026-09-18" }]
+    },
+    {
+      "id": "sample-2",
+      "company": "Google",
+      "role": "Software Engineer",
+      "workMode": "onsite",
+      "events": [
+        { "status": "applied", "date": "2026-09-08" },
+        { "status": "interviewing", "date": "2026-09-22" }
+      ]
+    },
+    {
+      "id": "sample-3",
+      "company": "Facebook",
+      "role": "Backend Developer",
+      "workMode": "remote",
+      "events": [
+        { "status": "applied", "date": "2026-08-28" },
+        { "status": "interviewing", "date": "2026-09-05" },
+        { "status": "offer", "date": "2026-09-25" }
+      ]
+    },
+    {
+      "id": "sample-4",
+      "company": "Amazon",
+      "role": "Frontend Engineer",
+      "workMode": "onsite",
+      "events": [{ "status": "applied", "date": "2026-09-19" }]
+    },
+    {
+      "id": "sample-5",
+      "company": "Apple",
+      "role": "iOS Developer",
+      "workMode": "onsite",
+      "events": [
+        { "status": "applied", "date": "2026-09-15" },
+        { "status": "interviewing", "date": "2026-10-01" }
+      ]
+    },
+    {
+      "id": "sample-6",
+      "company": "Netflix",
+      "role": "Full Stack Engineer",
+      "workMode": "remote",
+      "events": [
+        { "status": "applied", "date": "2026-09-01" },
+        { "status": "rejected", "date": "2026-09-14" }
+      ]
+    }
+  ]
+}

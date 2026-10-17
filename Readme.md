@@ -27,6 +27,7 @@ actually use every day; self-hosting comes after that.
 Not deployed yet.
 **v0.3** — usable MVP: data saved in the browser, status history, export/import.
 Not deployed yet.
+**v0.4** — JD link and keywords on each application.
 
 Working on: deploying to a static host.
 
@@ -43,8 +44,13 @@ Working on: deploying to a static host.
 - [x] Export / import JSON, load sample data
 - [ ] Deploy to a static host
 
+**After MVP**
+
+- [x] JD link and keywords per application, editable on each card
+
 **Later**
 
+- [ ] Filter by keyword
 - [ ] Which companies have gone quiet
 - [ ] Response rate trend over time
 - [ ] Edit company and role
@@ -93,6 +99,11 @@ means changing one file. Export/import is the backup.
 **Status changes are events.** Each application keeps a list of
 `{ status, date }`. Current status, applied date and "days since last update" are
 derived from it, so the history needed for trends later is already being recorded.
+
+**New fields are optional, not a new version.** `jdUrl` and `keywords` are left out
+when empty, so data saved before v0.4 is still valid and needs no migration. JD links
+must be `http(s)` — anything else (like `javascript:`) is rejected before it can end
+up in a link.
 
 ---
 
@@ -155,6 +166,8 @@ job-radarrrr/
 **v0.2** — Migrated from CDN scripts to a Vite build. Added ESLint and Prettier.
 **v0.3** — Saved to `localStorage`. Status history as events. Add, change status,
 delete, filter, stats, export/import, sample data.
+**v0.4** — Optional JD link and keywords per application: set when adding, shown
+on cards, editable via "Edit details". Existing data and exports still import.
 
 ---
 

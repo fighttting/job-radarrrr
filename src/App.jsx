@@ -6,6 +6,7 @@ import { routeTree } from "./routeTree.gen";
 import "./styles/tokens.css";
 import "./styles/base.css";
 import "./styles/card.css";
+import "./styles/board.css";
 
 const router = createRouter({ routeTree });
 const queryClient = new QueryClient();

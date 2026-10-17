@@ -1,0 +1,84 @@
+/* Board page: form + data controls on the side, application list in the main column.
+   Built only from tokens.css. */
+
+.board {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  align-items: start;
+}
+
+.board-side {
+  display: grid;
+  gap: var(--space-4);
+}
+
+/* Side-by-side on wider screens; the side column stays put while the list scrolls */
+@media (min-width: 860px) {
+  .board {
+    grid-template-columns: minmax(300px, 360px) 1fr;
+  }
+
+  .board-side {
+    position: sticky;
+    top: var(--space-4);
+    max-height: calc(100vh - 2 * var(--space-4));
+    overflow-y: auto;
+    /* room for the focus ring so it isn't clipped by overflow */
+    padding: 3px;
+    margin: -3px;
+  }
+}
+
+/* Panels on the side */
+.new-application-form,
+.data-controls {
+  padding: var(--space-4);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.new-application-form form {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.new-application-preview .application-card {
+  margin-bottom: 0;
+}
+
+.data-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.data-controls label {
+  margin-bottom: 0;
+}
+
+.data-controls input[type="file"] {
+  max-width: 100%;
+}
+
+.data-controls .form-errors {
+  flex-basis: 100%;
+}
+
+/* List header: filter and count on one row */
+.application-list > label {
+  margin-right: var(--space-2);
+}
+
+.application-list > select {
+  width: auto;
+  margin-bottom: var(--space-2);
+}
+
+.application-list > p {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}

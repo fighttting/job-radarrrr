@@ -10,9 +10,13 @@ export const Route = createLazyFileRoute("/")({
 function Board() {
   return (
     <div className="board">
-      <NewApplication />
-      <ApplicationList />
-      <DataControls />
+      <aside className="board-side">
+        <NewApplication />
+        <DataControls />
+      </aside>
+      <section className="board-main">
+        <ApplicationList />
+      </section>
     </div>
   );
 }

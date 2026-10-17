@@ -42,7 +42,7 @@ Working on: deploying to a static host.
 - [x] Filter by status — applied · interviewing · rejected · offer
 - [x] Stats: applications this week, response rate, average days since last update
 - [x] Export / import JSON, load sample data
-- [ ] Deploy to a static host
+- [x] Deploy to a static host: https://job-radarrr.netlify.app/
 
 **After MVP**
 

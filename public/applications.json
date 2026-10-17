@@ -6,6 +6,8 @@
       "company": "Zalando",
       "role": "Frontend Intern",
       "workMode": "hybrid",
+      "jdUrl": "https://jobs.zalando.com/",
+      "keywords": ["React", "TypeScript", "Berlin"],
       "events": [{ "status": "applied", "date": "2026-09-18" }]
     },
     {
@@ -13,6 +15,7 @@
       "company": "Google",
       "role": "Software Engineer",
       "workMode": "onsite",
+      "jdUrl": "https://www.google.com/about/careers/applications/",
       "events": [
         { "status": "applied", "date": "2026-09-08" },
         { "status": "interviewing", "date": "2026-09-22" }
@@ -23,6 +26,7 @@
       "company": "Facebook",
       "role": "Backend Developer",
       "workMode": "remote",
+      "keywords": ["Node.js", "PostgreSQL", "system design"],
       "events": [
         { "status": "applied", "date": "2026-08-28" },
         { "status": "interviewing", "date": "2026-09-05" },

@@ -19,7 +19,10 @@ export default function Header() {
         <h1 className="logo">Job Radar</h1>
       </Link>
       <div className="nav-links">
-        <Link to="/">Board</Link> <Link to="/stats">Stats</Link>
+        <Link to="/" activeOptions={{ exact: true }}>
+          Board
+        </Link>{" "}
+        <Link to="/stats">Stats</Link>
       </div>
       <div className="nav-count">{count} applications</div>
     </nav>

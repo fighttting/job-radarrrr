@@ -1,0 +1,97 @@
+/* Design tokens. Components use these, never raw colors. */
+
+:root {
+  color-scheme: light;
+
+  /* Palette */
+  --bg: #f8f6ff;
+  --surface: #ffffff;
+  --surface-muted: #f1edff;
+  --primary: #8067d8;
+  --primary-strong: #6b50c9; /* white text on this passes 4.5:1 */
+  --on-primary: #ffffff;
+  --accent: #f5b8d0;
+  --on-accent: #29243a;
+  --text: #29243a;
+  --text-muted: #6b6580;
+  --border: #e4dff5;
+  --danger: #c2385a;
+  --focus-ring: 0 0 0 3px rgb(128 103 216 / 0.35);
+
+  /* Shape */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-pill: 999px;
+
+  /* Spacing (4px scale) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgb(41 36 58 / 0.06);
+  --shadow-md: 0 4px 16px rgb(41 36 58 / 0.08);
+  --shadow-lg: 0 12px 32px rgb(41 36 58 / 0.12);
+
+  /* Type */
+  --font-sans:
+    system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --duration: 160ms;
+}
+
+/* Dark values: follow the system for now; a toggle can force either theme
+   by setting data-theme="light" or data-theme="dark" on <html> */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #15121f;
+    --surface: #201b2e;
+    --surface-muted: #2a2440;
+    --primary: #a996f0;
+    --primary-strong: #a996f0;
+    --on-primary: #15121f;
+    --accent: #e79bbb;
+    --on-accent: #15121f;
+    --text: #ece8f7;
+    --text-muted: #a7a0bd;
+    --border: #352e4a;
+    --danger: #f07a96;
+    --focus-ring: 0 0 0 3px rgb(169 150 240 / 0.45);
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+    --shadow-md: 0 4px 16px rgb(0 0 0 / 0.35);
+    --shadow-lg: 0 12px 32px rgb(0 0 0 / 0.45);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #15121f;
+  --surface: #201b2e;
+  --surface-muted: #2a2440;
+  --primary: #a996f0;
+  --primary-strong: #a996f0;
+  --on-primary: #15121f;
+  --accent: #e79bbb;
+  --on-accent: #15121f;
+  --text: #ece8f7;
+  --text-muted: #a7a0bd;
+  --border: #352e4a;
+  --danger: #f07a96;
+  --focus-ring: 0 0 0 3px rgb(169 150 240 / 0.45);
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 16px rgb(0 0 0 / 0.35);
+  --shadow-lg: 0 12px 32px rgb(0 0 0 / 0.45);
+}

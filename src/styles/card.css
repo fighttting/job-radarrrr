@@ -1,0 +1,110 @@
+/* Application card. Built only from tokens.css. */
+
+.application-card {
+  margin-bottom: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  transition:
+    border-color var(--duration) var(--ease),
+    box-shadow var(--duration) var(--ease);
+}
+
+.application-card:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md);
+}
+
+/* Company and role: bold, with a light-yellow marker behind the text */
+.application-card mark {
+  padding: 0 var(--space-1);
+  border-radius: var(--radius-sm);
+  background: var(--highlight);
+  color: var(--on-highlight);
+  font-weight: 700;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.card-company {
+  margin-bottom: var(--space-1);
+  font-size: var(--text-lg);
+}
+
+.card-role {
+  margin-bottom: var(--space-3);
+}
+
+/* Status select sits inline with the meta text, not full width */
+.application-card select {
+  width: auto;
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--text-sm);
+}
+
+.application-card small {
+  color: var(--text-muted);
+}
+
+.application-details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 0;
+}
+
+.application-details a {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.keyword {
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--surface-muted);
+  color: var(--primary-strong);
+  font-size: var(--text-sm);
+}
+
+.details-form {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--surface-muted);
+}
+
+.details-form label {
+  margin-bottom: 0;
+}
+
+/* Edit details / Delete: text-only until hovered */
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-1);
+  margin-top: var(--space-3);
+}
+
+button.button-quiet {
+  padding: var(--space-1) var(--space-2);
+  border-color: transparent;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+button.button-quiet:hover:not(:disabled) {
+  background: var(--surface-muted);
+  color: var(--text);
+}
+
+button.button-danger:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--danger) 10%, transparent);
+  color: var(--danger);
+}

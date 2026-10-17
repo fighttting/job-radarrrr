@@ -97,8 +97,12 @@ const ApplicationCard = ({ application, preview = false }) => {
 
   return (
     <div className="application-card">
-      <h2>{application.company}</h2>
-      <p>{application.role}</p>
+      <h2 className="card-company">
+        <mark>{application.company}</mark>
+      </h2>
+      <p className="card-role">
+        <mark>{application.role}</mark>
+      </p>
       {preview ? (
         <>
           <small>
@@ -134,22 +138,30 @@ const ApplicationCard = ({ application, preview = false }) => {
               onDone={() => setEditing(false)}
             />
           ) : (
-            <>
-              <Details application={application} />
-              <button onClick={() => setEditing(true)}>
-                Edit details
-              </button>{" "}
-            </>
+            <Details application={application} />
           )}
-          <button
-            onClick={() => {
-              if (window.confirm(`Delete ${application.company}?`)) {
-                deleteApplication.mutate(application.id);
-              }
-            }}
-          >
-            Delete
-          </button>
+          <div className="card-actions">
+            {!editing && (
+              <button
+                type="button"
+                className="button-quiet"
+                onClick={() => setEditing(true)}
+              >
+                Edit details
+              </button>
+            )}
+            <button
+              type="button"
+              className="button-quiet button-danger"
+              onClick={() => {
+                if (window.confirm(`Delete ${application.company}?`)) {
+                  deleteApplication.mutate(application.id);
+                }
+              }}
+            >
+              Delete
+            </button>
+          </div>
         </>
       )}
     </div>

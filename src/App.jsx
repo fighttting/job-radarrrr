@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { routeTree } from "./routeTree.gen";
 import "./styles/tokens.css";
 import "./styles/base.css";
+import "./styles/card.css";
 
 const router = createRouter({ routeTree });
 const queryClient = new QueryClient();

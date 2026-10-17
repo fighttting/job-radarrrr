@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ApplicationCard from "./ApplicationCard";
-import { STATUSES } from "./application";
+import { STATUSES, isValidUrl, parseKeywords } from "./application";
 import { today } from "./dates";
 import { useAddApplication } from "./useApplicationMutations";
 
@@ -15,11 +15,13 @@ function buildEvents(status, appliedOn, statusOn) {
   return events;
 }
 
-function validate({ company, role, status, appliedOn, statusOn }) {
+function validate({ company, role, jdUrl, status, appliedOn, statusOn }) {
   const errors = [];
   const now = today();
   if (!company.trim()) errors.push("Company is required.");
   if (!role.trim()) errors.push("Role is required.");
+  if (jdUrl.trim() && !isValidUrl(jdUrl.trim()))
+    errors.push("JD link must start with http:// or https://.");
   if (!appliedOn) errors.push("Applied date is required.");
   else if (appliedOn > now) errors.push("Applied date can't be in the future.");
   if (status !== "applied") {
@@ -39,13 +41,30 @@ export default function NewApplication() {
   const [workMode, setWorkMode] = useState("onsite");
   const [appliedOn, setAppliedOn] = useState(today);
   const [statusOn, setStatusOn] = useState(today);
+  const [jdUrl, setJdUrl] = useState("");
+  const [keywordsText, setKeywordsText] = useState("");
 
-  const errors = validate({ company, role, status, appliedOn, statusOn });
+  const errors = validate({
+    company,
+    role,
+    jdUrl,
+    status,
+    appliedOn,
+    statusOn,
+  });
+  // Optional fields are only included when filled in
+  const details = {
+    ...(jdUrl.trim() ? { jdUrl: jdUrl.trim() } : {}),
+    ...(parseKeywords(keywordsText).length > 0
+      ? { keywords: parseKeywords(keywordsText) }
+      : {}),
+  };
   const draft = {
     company: company || "Company name",
     role: role || "Role",
     workMode,
     events: buildEvents(status, appliedOn || today(), statusOn || today()),
+    ...details,
   };
 
   return (
@@ -61,6 +80,7 @@ export default function NewApplication() {
             role: role.trim(),
             workMode,
             events: buildEvents(status, appliedOn, statusOn),
+            ...details,
           });
           setCompany("");
           setRole("");
@@ -68,6 +88,8 @@ export default function NewApplication() {
           setWorkMode("onsite");
           setAppliedOn(today());
           setStatusOn(today());
+          setJdUrl("");
+          setKeywordsText("");
         }}
       >
         <div>
@@ -149,11 +171,33 @@ export default function NewApplication() {
           </div>
         </div>
 
+        <div>
+          <label htmlFor="jd-url">JD link:</label>
+          <input
+            type="url"
+            name="jd-url"
+            id="jd-url"
+            placeholder="https://…"
+            value={jdUrl}
+            onChange={(e) => setJdUrl(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="keywords">Keywords:</label>
+          <input
+            name="keywords"
+            id="keywords"
+            placeholder="React, AWS, visa"
+            value={keywordsText}
+            onChange={(e) => setKeywordsText(e.target.value)}
+          />
+        </div>
+
         <div className="new-application-preview">
           <ApplicationCard application={draft} preview />
         </div>
 
-        {(company || role) && errors.length > 0 && (
+        {(company || role || jdUrl) && errors.length > 0 && (
           <ul className="form-errors">
             {errors.map((error) => (
               <li key={error}>{error}</li>

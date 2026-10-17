@@ -8,9 +8,12 @@ export const lastUpdate = (app) => app.events.at(-1).date;
 export const isValidUrl = (value) =>
   typeof value === "string" && /^https?:\/\/\S+$/.test(value);
 
-// "React, AWS ,, visa" -> ["React", "AWS", "visa"]
-export const parseKeywords = (text) =>
-  text
-    .split(",")
-    .map((keyword) => keyword.trim())
-    .filter(Boolean);
+// "React, AWS ,, visa, React" -> ["React", "AWS", "visa"]
+export const parseKeywords = (text) => [
+  ...new Set(
+    text
+      .split(",")
+      .map((keyword) => keyword.trim())
+      .filter(Boolean),
+  ),
+];

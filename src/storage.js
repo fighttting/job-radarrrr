@@ -1,4 +1,4 @@
-import { STATUSES } from "./application";
+import { STATUSES, isValidUrl } from "./application";
 
 const KEY = "job-radar";
 const VERSION = 1;
@@ -19,7 +19,12 @@ function isValidApplication(app) {
         STATUSES.includes(event.status) &&
         typeof event.date === "string" &&
         DATE.test(event.date),
-    )
+    ) &&
+    // Optional fields: older data and exports don't have them
+    (app.jdUrl === undefined || isValidUrl(app.jdUrl)) &&
+    (app.keywords === undefined ||
+      (Array.isArray(app.keywords) &&
+        app.keywords.every((keyword) => typeof keyword === "string")))
   );
 }
 

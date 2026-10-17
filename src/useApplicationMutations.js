@@ -33,6 +33,22 @@ export const useChangeStatus = () =>
     ),
   }));
 
+// Empty values remove the field, so stored data only holds what was filled in
+export const useUpdateDetails = () =>
+  useApplicationsMutation((data, { id, jdUrl, keywords }) => ({
+    ...data,
+    applications: data.applications.map((app) => {
+      if (app.id !== id) return app;
+      // eslint-disable-next-line no-unused-vars
+      const { jdUrl: _url, keywords: _keywords, ...rest } = app;
+      return {
+        ...rest,
+        ...(jdUrl ? { jdUrl } : {}),
+        ...(keywords.length > 0 ? { keywords } : {}),
+      };
+    }),
+  }));
+
 export const useDeleteApplication = () =>
   useApplicationsMutation((data, id) => ({
     ...data,

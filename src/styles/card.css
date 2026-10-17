@@ -17,15 +17,11 @@
   box-shadow: var(--shadow-md);
 }
 
-/* Company and role: bold, with a light-yellow marker behind the text */
-.application-card mark {
-  padding: 0 var(--space-1);
-  border-radius: var(--radius-sm);
-  background: var(--highlight);
-  color: var(--on-highlight);
+/* Company and role: bold, in the title color */
+.card-company,
+.card-role {
+  color: var(--card-title);
   font-weight: 700;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
 }
 
 .card-company {
@@ -37,11 +33,23 @@
   margin-bottom: var(--space-3);
 }
 
-/* Status select sits inline with the meta text, not full width */
-.application-card select {
+/* Status: a pink pill, both as the editable select and in the preview */
+.application-card select,
+.status-pill {
+  display: inline-block;
   width: auto;
-  padding: var(--space-1) var(--space-2);
+  padding: 2px var(--space-3);
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--on-accent);
   font-size: var(--text-sm);
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.application-card select {
+  cursor: pointer;
 }
 
 .application-card small {
@@ -65,8 +73,9 @@
   padding: 2px var(--space-2);
   border-radius: var(--radius-pill);
   background: var(--surface-muted);
-  color: var(--primary-strong);
+  color: var(--card-title);
   font-size: var(--text-sm);
+  font-weight: 600;
 }
 
 .details-form {

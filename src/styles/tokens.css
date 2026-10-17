@@ -12,8 +12,7 @@
   --on-primary: #ffffff;
   --accent: #f5b8d0;
   --on-accent: #29243a;
-  --highlight: #fff1b8; /* light yellow marker */
-  --on-highlight: #29243a;
+  --card-title: #8a5f00; /* company, role and keywords; dark gold, 4.5:1+ on white and surface-muted */
   --text: #29243a;
   --text-muted: #6b6580;
   --border: #e4dff5;
@@ -67,8 +66,7 @@
     --on-primary: #15121f;
     --accent: #e79bbb;
     --on-accent: #15121f;
-    --highlight: rgb(255 214 102 / 0.22);
-    --on-highlight: #fff4cc;
+    --card-title: #ffe58f;
     --text: #ece8f7;
     --text-muted: #a7a0bd;
     --border: #352e4a;
@@ -90,8 +88,7 @@
   --on-primary: #15121f;
   --accent: #e79bbb;
   --on-accent: #15121f;
-  --highlight: rgb(255 214 102 / 0.22);
-  --on-highlight: #fff4cc;
+  --card-title: #ffe58f;
   --text: #ece8f7;
   --text-muted: #a7a0bd;
   --border: #352e4a;

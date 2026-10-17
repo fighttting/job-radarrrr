@@ -97,17 +97,12 @@ const ApplicationCard = ({ application, preview = false }) => {
 
   return (
     <div className="application-card">
-      <h2 className="card-company">
-        <mark>{application.company}</mark>
-      </h2>
-      <p className="card-role">
-        <mark>{application.role}</mark>
-      </p>
+      <h2 className="card-company">{application.company}</h2>
+      <p className="card-role">{application.role}</p>
       {preview ? (
         <>
-          <small>
-            {status} · {application.workMode}
-          </small>
+          <span className="status-pill">{status}</span>
+          <small> {application.workMode}</small>
           <Details application={application} />
         </>
       ) : (
